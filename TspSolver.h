@@ -21,7 +21,10 @@ private:
     const Graph& graph_; // Référence constante au graphe
 
     // Implémentation de l'algorithme du plus proche voisin
-    Tour nearestNeighborSolve() const;
+    Tour nearestNeighborSolve(int start_node) const;
+
+    // L'algorithme remplace des paires d'arêtes pour réduire la distance totale de la tournée
+    Tour OptimizationSwapEdges(const Tour& tour) const;
 
     // Empêcher la copie et l'assignation (le solver est lié à un graphe spécifique) pour le moment
     TspSolver(const TspSolver&) = delete;
