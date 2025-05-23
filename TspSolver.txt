@@ -1,6 +1,0 @@
-on prends un point 
-puis choisis l'autre point qui a la plus courte distance qui n'est pas déja dans le chemin
-
-
-on créer un vecteur pour enrengistré les points du chemin
-ex : [1,5,3,...,-1] -1 fin du tour
