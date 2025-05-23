@@ -65,7 +65,7 @@ int main(int argc, char* argv[]) {
     }
 
     // 4. Résoudre le TSP en utilisant le TspSolver
-    std::cout << std::endl << "Résolution du TSP avec l'algorithme du plus proche voisin..." << std::endl;
+    std::cout << std::endl << "Résolution du TSP..." << std::endl;
     TspSolver solver(graph);
     Tour solution_tour = solver.solve();
 

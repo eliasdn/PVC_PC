@@ -109,19 +109,14 @@ Tour TspSolver::OptimizationSwapEdges(const Tour& tour) const {
                 // Calculer la variation de distance
                 int delta = graph_.getDistance(a, c) + graph_.getDistance(b, d) - graph_.getDistance(a, b) - graph_.getDistance(c, d);
 
-                std::cout << "i = " << i << ", j = " << j << ", a = " << a << ", b = " << b << ", c = " << c << ", d = " << d << ", delta = " << delta << std::endl;
-                std::cout << "Distance avant : " << best_tour.getTotalDistance() << std::endl;
-
                 // Si l'échange améliore la tournée
                 if (delta < 0) {
                     Tour new_tour = best_tour;
                     new_tour.reverseSubsequence(i + 1, j);
                     new_tour.recalculateDistance(graph_); // Recalculer la distance
-                    std::cout << "Distance après : " << new_tour.getTotalDistance() << std::endl;
                     if (new_tour.getTotalDistance() < best_tour.getTotalDistance()) {
                         best_tour = new_tour;
                         improved = true;
-                        std::cout << "Amélioration trouvée !" << std::endl;
                     }
                 }
             }
