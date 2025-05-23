@@ -1,5 +1,6 @@
 #include "Tour.h"
-#include "Graph.h"
+#include "Graph.h" // Inclusion complète du Graph dans le fichier .cpp
+#include <algorithm> // Pour std::swap
 
 // Constructeur
 Tour::Tour(const std::vector<int>& nodes, const Graph& graph)
@@ -30,11 +31,33 @@ Tour::Tour(const std::vector<int>& nodes, const Graph& graph)
 void Tour::print() const {
     std::cout << "Tour (" << nodes_.size() << " nœuds) : ";
     for (size_t i = 0; i < nodes_.size(); ++i) {
-        // Afficher les IDs des nœuds
+        // Afficher les IDs des nœuds en 1-basé pour une meilleure lisibilité
         std::cout << nodes_[i] + 1 << (i == nodes_.size() - 1 ? "" : " -> ");
     }
     std::cout << std::endl;
     std::cout << "Distance totale : " << totalDistance_ << std::endl;
 }
 
-// Getters (définis dans Tour.h)
+// Inverse une sous-séquence de la tournée
+void Tour::reverseSubsequence(int start, int end) {
+    if (start >= end) {
+        return; // Rien à inverser
+    }
+    while (start < end) {
+        std::swap(nodes_[start], nodes_[end]);
+        start++;
+        end--;
+    }
+}
+
+// Recalcul la distance de l'objet
+void Tour::recalculateDistance(const Graph& graph) {
+    totalDistance_ = 0;
+    if (nodes_.size() < 2) {
+        return;
+    }
+    for (size_t i = 0; i < nodes_.size() - 1; ++i) {
+        totalDistance_ += graph.getDistance(nodes_[i], nodes_[i + 1]);
+    }
+    totalDistance_ += graph.getDistance(nodes_.back(), nodes_.front());
+}
